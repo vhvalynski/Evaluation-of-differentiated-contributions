@@ -288,7 +288,7 @@ class модель(QgsProcessingAlgorithm):
         feedback.setCurrentStep(step); step += 1
         if feedback.isCanceled(): return {}
 
-        # === РАСЧЁТ ОБЩЕЙ ПЛОЩАДИ ПОЛЯ ===
+        # Расчет общей площади поля
         total_area_ha = 0.0
         contour_id = results.get('Contourfield')
         if contour_id:
@@ -318,7 +318,7 @@ class модель(QgsProcessingAlgorithm):
                         if isinstance(v, (int, float)):
                             total_area_ha += v
 
-        # === ФУНКЦИЯ ДЛЯ ОТЧЁТА ===
+        # Функция для отчета
         def write_stats(layer_id, label, f, total_area):
             if not layer_id:
                 f.write(f"{label}: Слой не создан\n")
@@ -343,7 +343,7 @@ class модель(QgsProcessingAlgorithm):
             f.write(f"  Доля:     {pct:.2f}%\n")
             return area
 
-        # === ГЕНЕРАЦИЯ ОТЧЁТА ===
+        # Генерация отчета 
         project = QgsProject.instance()
         if project.fileName():
             project_dir = os.path.dirname(project.fileName())
